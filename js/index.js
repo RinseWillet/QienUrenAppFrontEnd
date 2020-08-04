@@ -98,11 +98,11 @@ function formulierObjectMaken(){
         dag.opdrachtUren = document.getElementById(`opdracht-uren-${i + 1}`).value;
         dag.overwerkUren = document.getElementById(`overwerk-uren-${i + 1}`).value;
         dag.verlofUren = document.getElementById(`verlof-uren-${i + 1}`).value;
-        dag.ziekUren = document.getElementById(`ziekte-uren-${i + 1}`).value;
+        dag.ziekteUren = document.getElementById(`ziekte-uren-${i + 1}`).value;
         dag.trainingUren = document.getElementById(`training-uren-${i + 1}`).value;
-        dag.overigUren = document.getElementById(`overig-uren-${i + 1}`).value;
+        dag.overigeUren = document.getElementById(`overig-uren-${i + 1}`).value;
         dag.overigeUrenUitleg = document.getElementById(`verklaring-overig-${i + 1}`).value;
-    
+
         dagen.push(dag);
     }
 
@@ -112,12 +112,10 @@ function formulierObjectMaken(){
     formulier.werkDagen = dagen;
 
     console.log(JSON.stringify(formulier));
+
     xhr.open("POST", "http://localhost:8082/api/formulier/nieuw", true);
     xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.send(formulier);
-
-    console.log(formulier.werkDagen);
-    console.log(formulier);
+    xhr.send(JSON.stringify(formulier));
 }
 
 //Formulier JSON object 
