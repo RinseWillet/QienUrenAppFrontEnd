@@ -109,9 +109,15 @@ function formulierObjectMaken(){
     var formulier = {};
     formulier.jaar = selectJaar.value;
     formulier.maand = selectMaand.value;
-    formulier.dagen = dagen;
+    formulier.werkDagen = dagen;
 
     console.log(JSON.stringify(formulier));
+    xhr.open("POST", "http://localhost:8082/api/formulier/nieuw", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send(formulier);
+
+    console.log(formulier.werkDagen);
+    console.log(formulier);
 }
 
 //Formulier JSON object 
