@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <!-- Place your kit's code here -->
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" type="image/png" href="./img/cropped-Qien-logo-32x32.png" />
     <script src="https://kit.fontawesome.com/dd7391bfa9.js" crossorigin="anonymous"></script>
     <title>Trainee</title>
 </head>
@@ -48,100 +48,49 @@
                 <div class="col-md-9">
                     <div class="card flex-md-row mt-2 mb-2 box-shadow h-md-250">
                         <div class="card-body align-items-start">
-                            
+
                             <form>
                                 <div class="form-group">
-                                    <label for="maand">Geselecteerde maand: </label>
-                                    <select id="maand">
-                                        <option value="Januari">Januari</option>
-                                        <option value="Februari">Februari</option>
-                                        <option value="Maart">Maart</option>
-                                        <option value="April">April</option>
-                                        <option value="Mei">Mei</option>
-                                        <option value="Juni">Juni</option>
-                                        <option value="Juli">Juli</option>
-                                        <option value="Augustus">Augustus</option>
-                                        <option value="September">September</option>
-                                        <option value="Oktober">Oktober</option>
-                                        <option value="November">November</option>
-                                        <option value="December">December</option>
-                                    </select>
+                                    <div class="row">
+                                        <div class="col">
+                                            <!-- <label for="maanden-select">Geselecteerde maand: </label> -->
+                                            <select id="maanden-select" required>
+                                                <option>--Maand--</option>
+                                                <!-- Maanden worden gevuld vanuit index.js -->
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <!-- <label for="jaren-select">Geselecteerd jaar</label> -->
+                                            <select id="jaren-select" required>
+                                                <option>--Jaar--</option>
+                                                <!-- Jaren worden gevuld vanuit index.js -->
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="table-container mt-2">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">Datum</th>
+                                                    <th scope="col">Opdracht</th>
+                                                    <th scope="col">Overwerk</th>
+                                                    <th scope="col">Verlof</th>
+                                                    <th scope="col">Ziek</th>
+                                                    <th scope="col">Training</th>
+                                                    <th scope="col">Overig</th>
+                                                    <th scope="col">Verklaring m.b.t. overig</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="form-body">
 
-                                    <table class="table table-striped">
-                                        <thead>
-                                          <tr>
-                                            <th scope="col">Datum</th>
-                                            <th scope="col">Opdracht</th>
-                                            <th scope="col">Overwerk</th>
-                                            <th scope="col">Verlof</th>
-                                            <th scope="col">Ziek</th>
-                                            <th scope="col">Training</th>
-                                            <th scope="col">Overig</th>
-                                            <th scope="col">Verklaring m.b.t. overig</th>
-                                          </tr>
-                                        </thead>
-                                        <tbody>
-                                          <tr>
-                                            <th scope="row">1-Aug</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">2-Aug</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">3-Aug</th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                          </tr>
-                                        </tbody>
-                                      </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                                    <br>
-                                    <label for="exampleFormControlInput1">Email address</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect1">Example select</label>
-                                    <select class="form-control" id="exampleFormControlSelect1">
-                                      <option>1</option>
-                                      <option>2</option>
-                                      <option>3</option>
-                                      <option>4</option>
-                                      <option>5</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleFormControlSelect2">Example multiple select</label>
-                                    <select multiple class="form-control" id="exampleFormControlSelect2">
-                                      <option>1</option>
-                                      <option>2</option>
-                                      <option>3</option>
-                                      <option>4</option>
-                                      <option>5</option>
-                                    </select>
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Example textarea</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                  </div>
+
+                                </div>
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="button" class="btn btn-danger">Download</button>
                             </form>
 
                         </div>
@@ -155,15 +104,18 @@
                             <p>Maand: Augustus 2020</p>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success">Submit</button>
-                    <button type="button" class="btn btn-danger">Download</button>
                 </div>
             </div>
         </div>
     </section>
 
+    <footer>
+        <div class="container">
+            <span>COPYRIGHT &copy; 2020 QIEN</span>
+        </div>
+    </footer>
 
-
+    <script src="js/index.js"></script>
 
 </body>
 

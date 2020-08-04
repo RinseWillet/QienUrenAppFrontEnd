@@ -1,0 +1,46 @@
+.navbar {
+    background-color: blueviolet !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+.navbar .nav-link {
+    color: white !important;
+}
+
+i {
+    font-size: 2em;
+}
+
+table {
+    font-size: 0.8em;
+}
+
+tr {
+    line-height: 0.7em;
+}
+
+td {
+    border: 1px solid black;
+}
+
+.form-input {
+    width: 100%;
+}
+
+footer {
+    background-color: black;
+    color: white;
+    min-height: 200px;
+    padding: 175px 0px 25px 10px;
+}
+
+footer .container {
+    border-top: solid 1px white;
+}
+
+span {
+    padding-top: 50px;
+}
