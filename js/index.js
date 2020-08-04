@@ -3,8 +3,6 @@ const maanden = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli",
 let startJaar = new Date().getFullYear();
 let eindJaar = 2024;
 let huidigeDatum = new Date();
-console.log(huidigeDatum.getFullYear());
-console.log(huidigeDatum.getMonth());
 
 // DOM Elementen selecteren
 const selectMaand = document.getElementById("maanden-select");
@@ -36,9 +34,18 @@ const dagenInMaand = (jaar, maand) => {
     return new Date(jaar, maand, 0).getDate();
 }
 
+const huidigeMaandEnJaar = () => {
+    let jaar = huidigeDatum.getFullYear();
+    let maand = huidigeDatum.getMonth();
+    selectMaand.insertAdjacentHTML("beforeend", `<option selected="${maand}" value="${maand}">${maanden[maand]}</option>`);
+    selectJaar.insertAdjacentHTML("beforeend", `<option selected="${jaar}" value="${jaar}">${jaar}</option>`);
+}
+
 window.onload = () => {
     laadMaanden();
     laadJaren();
+    huidigeMaandEnJaar();
+    veranderMaandJaar();
 };
 
 // Event listeners voor het wijzigen van maand en/of jaar
