@@ -19,15 +19,26 @@ table {
 }
 
 tr {
-    line-height: 0.7em;
+    line-height: 0.1em;
+}
+
+th{
+    width: 5%;
 }
 
 td {
-    border: 1px solid black;
+    border: 1px solid lightgray;
+    width: 10%;
+    padding: 0 !important;
 }
 
 .form-input {
-    width: 100%;
+    margin: 0;
+    width: 95%;
+}
+
+.form-verklaring {
+    width: 30%;
 }
 
 footer {

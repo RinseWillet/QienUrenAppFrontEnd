@@ -70,16 +70,17 @@ selectMaand.onchange = veranderMaandJaar;
 // Functie om formulier te vullen
 const genereerFormulier = (dagen) => {
     for (let i = 0; i < dagen; i++) {
-        formBody.insertAdjacentHTML("beforeend", `<tr>
-        <th scope="row">${i + 1}</th>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>`)
+        formBody.insertAdjacentHTML("beforeend", 
+        `<tr>
+            <th scope="row">${i + 1}</th>
+            <td><input type="text" class="form-input"></td>
+            <td><input type="text" class="form-input"></td>
+            <td><input type="text" class="form-input"></td>
+            <td><input type="text" class="form-input"></td>
+            <td><input type="text" class="form-input"></td>
+            <td><input type="text" class="form-input"></td>
+            <td class="form-verklaring"><input type="text" class="form-input"></td>
+        </tr>`)
     }
 }
 
