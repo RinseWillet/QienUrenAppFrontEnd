@@ -73,13 +73,13 @@ const genereerFormulier = (dagen) => {
         formBody.insertAdjacentHTML("beforeend", 
         `<tr>
             <th scope="row">${i + 1}</th>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td class="form-verklaring"><input type="text" class="form-input"></td>
+            <td><input type="text" class="form-input" id="opdracht-uren"></td>
+            <td><input type="text" class="form-input" id="overwerk-uren"></td>
+            <td><input type="text" class="form-input" id="verlof-uren"></td>
+            <td><input type="text" class="form-input" id="ziekte-uren"></td>
+            <td><input type="text" class="form-input" id="training-uren"></td>
+            <td><input type="text" class="form-input" id="overig-uren"></td>
+            <td class="form-verklaring"><input type="text" class="form-input" id="overig-verklaring"></td>
         </tr>`)
     }
 }
