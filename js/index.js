@@ -71,15 +71,15 @@ selectMaand.onchange = veranderMaandJaar;
 const genereerFormulier = (dagen) => {
     for (let i = 0; i < dagen; i++) {
         formBody.insertAdjacentHTML("beforeend", 
-        `<tr>
+        `<tr id="dag-${i+1}" class="formulier-rij">
             <th scope="row">${i + 1}</th>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td><input type="text" class="form-input"></td>
-            <td class="form-verklaring"><input type="text" class="form-input"></td>
+            <td><input type="number" class="form-input" id="opdracht-uren-${i + 1}"></td>
+            <td><input type="number" class="form-input" id="overwerk-uren-${i + 1}"></td>
+            <td><input type="number" class="form-input" id="verlof-uren-${i + 1}"></td>
+            <td><input type="number" class="form-input" id="ziekte-uren-${i + 1}"></td>
+            <td><input type="number" class="form-input" id="training-uren-${i + 1}"></td>
+            <td><input type="number" class="form-input" id="overig-uren-${i + 1}"></td>
+            <td class="form-verklaring"><input type="text" class="form-input" id="verklaring-overig-${i + 1}"></td>
         </tr>`)
     }
 }
@@ -87,3 +87,33 @@ const genereerFormulier = (dagen) => {
 const verwijderFormulier = () => {
     formBody.innerHTML = "";
 }
+
+function formulierObjectMaken(){
+    var xhr = new XMLHttpRequest();
+    var x = document.getElementsByClassName("formulier-rij");
+    var dagen = [];
+
+    for (var i = 0; i < x.length; i++) {
+        var dag = {};
+        dag.opdrachtUren = document.getElementById(`opdracht-uren-${i + 1}`).value;
+        dag.overwerkUren = document.getElementById(`overwerk-uren-${i + 1}`).value;
+        dag.verlofUren = document.getElementById(`verlof-uren-${i + 1}`).value;
+        dag.ziekUren = document.getElementById(`ziekte-uren-${i + 1}`).value;
+        dag.trainingUren = document.getElementById(`training-uren-${i + 1}`).value;
+        dag.overigUren = document.getElementById(`overig-uren-${i + 1}`).value;
+        dag.overigeUrenUitleg = document.getElementById(`verklaring-overig-${i + 1}`).value;
+    
+        dagen.push(dag);
+    }
+
+    var formulier = {};
+    formulier.jaar = selectJaar.value;
+    formulier.maand = selectMaand.value;
+    formulier.dagen = dagen;
+
+    console.log(JSON.stringify(formulier));
+}
+
+//Formulier JSON object 
+//Maand 0-11, Jaar, Dagen[]
+//Dag heeft datum, opdrachturen, overwerkuren, verlofuren, ziekuren, traininguren, overigeuren, verklaring
