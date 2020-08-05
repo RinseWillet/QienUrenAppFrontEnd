@@ -10,6 +10,10 @@ const selectJaar = document.getElementById("jaren-select");
 const geselecteerdeMaand = selectMaand.value;
 const geselecteerdJaar = selectJaar.value;
 const formBody = document.getElementById("form-body");
+const alertSuccess = document.querySelector(".alert-success");
+const tableSelect = document.querySelector(".table-container");
+const buttonSubmit = document.querySelector(".btn-success");
+const buttonDownload = document.querySelector(".btn-danger");
 
 // Functies om de maanden en jaren te vullen
 const laadMaanden = () => {
@@ -58,6 +62,12 @@ const veranderMaandJaar = () => {
     console.log("Aantal dagen in gekozen maand: " + dagen);
     verwijderFormulier();
     genereerFormulier(dagen);
+    if(tableSelect.style.display = "none"){
+        tableSelect.style.display = "block";
+        alertSuccess.style.display = "none";
+        buttonSubmit.style.display = "inline-block";
+        buttonDownload.style.display = "inline-block";
+    }
 }
 
 selectJaar.onchange = veranderMaandJaar;
@@ -119,6 +129,10 @@ function formulierObjectMaken(){
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(formulier));
 
+    tableSelect.style.display = "none";
+    alertSuccess.style.display = "block";
+    buttonSubmit.style.display = "none";
+    buttonDownload.style.display = "none";
 }
 
 //Formulier JSON object 

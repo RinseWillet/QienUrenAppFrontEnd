@@ -10,16 +10,33 @@ const laatFormulierenZien = () => {
         deFormulieren = JSON.parse(this.responseText);
         let inTeVoegenHTML = ``;
         if (xhr.readyState == 4) {
-            deFormulieren.forEach((e) => {
-                console.log(e.medewerker);
-                console.log(e.maand);
-                console.log(e.jaar);
-                inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.goedkeuringAdmin}</li>`;
-                formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
-            });
-                // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-    //             Launch static backdrop modal
-    //         </button>
+            if (deFormulieren.length > 0) {
+                console.log("in de if");
+                deFormulieren.forEach((e) => {
+                    console.log(e.medewerker);
+                    console.log(e.maand);
+                    console.log(e.jaar);
+                    console.log(e.formulierstatus);
+                    
+                    inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
+                    formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+                })
+  
+            } else {
+                console.log("in de else");
+            inTeVoegenHTML = `<div class="alert alert-danger" role="alert">                <h4 class="alert-heading">Sapristi, geen formulieren!</h4>
+                <p>tekst - veel plezier</p>
+                <hr>
+                <p class="mb-0">text - nog meer plezier.</p>
+            </div>`;
+
+
+              console.log(inTeVoegenHTML);
+              formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+            }
+            // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+            //             Launch static backdrop modal
+            //         </button>
         }
     }
 
@@ -31,8 +48,8 @@ const genereerFormulier = (formulier) => {
     console.log(formulier.werkDagen)
     modalHeader.innerHTML = `Sjarl | ${formulier.maand}/${formulier.jaar}`
     for (let i = 0; i < formulier.werkDagen.length; i++) {
-        formBody.insertAdjacentHTML("beforeend", 
-        `<tr id="dag-${i+1}" class="formulier-rij">
+        formBody.insertAdjacentHTML("beforeend",
+            `<tr id="dag-${i + 1}" class="formulier-rij">
             <th scope="row">${i + 1}</th>
             <td><class="form-input" id="opdracht-uren-${i + 1}">${formulier.werkDagen[i].opdrachtUren}</td>
             <td><class="form-input" id="overwerk-uren-${i + 1}">${formulier.werkDagen[i].overwerkUren}</td>
