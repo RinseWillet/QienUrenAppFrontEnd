@@ -68,3 +68,7 @@ span {
 .modal-dialog {
     max-width: 100% !important;
 }
+
+.main {
+    min-height: 70vh;
+}
