@@ -105,7 +105,6 @@ function formulierObjectMaken(){
         dag.trainingUren = document.getElementById(`training-uren-${i + 1}`).value;
         dag.overigeUren = document.getElementById(`overig-uren-${i + 1}`).value;
         dag.overigeUrenUitleg = document.getElementById(`verklaring-overig-${i + 1}`).value;
-
         dagen.push(dag);
     }
 
@@ -119,6 +118,7 @@ function formulierObjectMaken(){
     xhr.open("POST", "http://localhost:8082/api/formulier/nieuw", true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send(JSON.stringify(formulier));
+
 }
 
 //Formulier JSON object 
