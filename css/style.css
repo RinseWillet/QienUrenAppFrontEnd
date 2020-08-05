@@ -69,6 +69,10 @@ span {
     max-width: 100% !important;
 }
 
-.main {
-    min-height: 70vh;
+.alert-success {
+    display: none;
+}
+
+main{
+   min-height: 80vh; 
 }
