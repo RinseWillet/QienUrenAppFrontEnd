@@ -95,6 +95,9 @@ function formulierObjectMaken(){
 
     for (var i = 0; i < x.length; i++) {
         var dag = {};
+        let j = i + 2;
+        let datum = new Date(selectJaar.value, selectMaand.value, j);
+        dag.datum = datum;
         dag.opdrachtUren = document.getElementById(`opdracht-uren-${i + 1}`).value;
         dag.overwerkUren = document.getElementById(`overwerk-uren-${i + 1}`).value;
         dag.verlofUren = document.getElementById(`verlof-uren-${i + 1}`).value;
