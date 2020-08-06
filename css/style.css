@@ -1,5 +1,11 @@
+body {
+    font-family: 'Titillium Web', sans-serif;
+    letter-spacing: 0.1em;
+    color: #9B9B9B;
+}
+
 .navbar {
-    background-color: blueviolet !important;
+    background-color: #9D3FF3 !important;
 }
 
 .navbar-brand {
@@ -27,7 +33,7 @@ th{
 }
 
 .table td {
-    border: 1px solid lightgray;
+    border: 1px solid #9B9B9B;
     width: 10%;
     padding: 0 !important;
     vertical-align: middle !important;
@@ -75,4 +81,24 @@ span {
 
 main{
    min-height: 80vh; 
+}
+
+.list-group-header {
+    pointer-events: none;
+    background: #9D3FF3;
+    color: white;
+}
+
+.list-group-item {
+    padding: 5px 5px 5px 5px;
+}
+
+.list-group-item:hover {
+    cursor: pointer; 
+}
+
+.list-group-item span {
+    pointer-events: none;
+    padding: 0;
+    width: 25%;
 }
