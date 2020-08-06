@@ -2,6 +2,36 @@ const formulierenLijst = document.getElementById("form-list");
 const formulierItem = document.querySelector(".list-group-item");
 const formBody = document.getElementById("form-body");
 const modalHeader = document.querySelector(".modal-title");
+const klikbaarOogje = document.querySelector(".fa-eye");
+
+const maandNummerNaarString = (maandNummer) => {
+    switch(maandNummer) {
+        case 0:
+            return "Januari";
+        case 1:
+            return "Februari";
+        case 2: 
+            return "Maart";
+        case 3:
+            return "April";
+        case 4:
+            return "Mei";
+        case 5:
+            return "Juni";
+        case 6:
+            return "Juli";
+        case 7:
+            return "Augustus";
+        case 8:
+            return "September";
+        case 9:
+            return "Oktober";
+        case 10:
+            return "November";
+        case 11:
+            return "December";
+    }
+}
 
 const laatFormulierenZien = () => {
     let xhr = new XMLHttpRequest();
@@ -13,18 +43,18 @@ const laatFormulierenZien = () => {
             if (deFormulieren.length > 0) {
                 console.log("in de if");
                 deFormulieren.forEach((e) => {
-                    console.log(e.medewerker);
-                    console.log(e.maand);
-                    console.log(e.jaar);
-                    console.log(e.formulierstatus);
+                    e.maand = maandNummerNaarString(e.maand);
                     
-                    inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
+                    // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
+                    // class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
+                    inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
+                    class="list-group-item list-group-item-action d-flex justify-content-between"><span>Rinse Willet</span><span>${e.maand}</span><span>${e.jaar}</span><span>${e.formulierstatus}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
   
             } else {
                 console.log("in de else");
-            inTeVoegenHTML = `<div class="alert alert-danger" role="alert">                <h4 class="alert-heading">Sapristi, geen formulieren!</h4>
+            inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen formulieren!</h4>
                 <p>tekst - veel plezier</p>
                 <hr>
                 <p class="mb-0">text - nog meer plezier.</p>
@@ -73,10 +103,12 @@ function getEventTarget(e) {
 
 formulierenLijst.onclick = function (event) {
     var target = getEventTarget(event);
+    console.log(event.target);
     let id = target.id;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
         let hetFormulier = JSON.parse(this.responseText);
+        console.log(hetFormulier);
         if (xhr.readyState == 4) {
             verwijderFormulier();
             genereerFormulier(hetFormulier);
