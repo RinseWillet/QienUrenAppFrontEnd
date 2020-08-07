@@ -7,12 +7,12 @@ const goedkeurKnopje = document.getElementById("goedkeuren");
 const afkeurKnopje = document.getElementById("afkeuren");
 
 const maandNummerNaarString = (maandNummer) => {
-    switch(maandNummer) {
+    switch (maandNummer) {
         case 0:
             return "Januari";
         case 1:
             return "Februari";
-        case 2: 
+        case 2:
             return "Maart";
         case 3:
             return "April";
@@ -39,14 +39,15 @@ const laatFormulierenZien = () => {
     let xhr = new XMLHttpRequest();
 
     xhr.onreadystatechange = function () {
-        deFormulieren = JSON.parse(this.responseText);
-        let inTeVoegenHTML = ``;
         if (xhr.readyState == 4) {
+            deFormulieren = JSON.parse(this.responseText);
+            let inTeVoegenHTML = ``;
+
             if (deFormulieren.length > 0) {
                 console.log("in de if");
                 deFormulieren.forEach((e) => {
                     e.maand = maandNummerNaarString(e.maand);
-                    
+
                     // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
                     // class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
@@ -55,15 +56,15 @@ const laatFormulierenZien = () => {
                 })
             } else {
                 console.log("in de else");
-            inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen formulieren!</h4>
+                inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen formulieren!</h4>
                 <p>tekst - veel plezier</p>
                 <hr>
                 <p class="mb-0">text - nog meer plezier.</p>
             </div>`;
 
 
-              console.log(inTeVoegenHTML);
-              formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+                console.log(inTeVoegenHTML);
+                formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
             }
             // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
             //             Launch static backdrop modal
@@ -108,8 +109,8 @@ formulierenLijst.onclick = function (event) {
     let hetFormulier;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
-        hetFormulier = JSON.parse(this.responseText);
         if (xhr.readyState == 4) {
+            hetFormulier = JSON.parse(this.responseText);
             verwijderFormulier();
             genereerFormulier(hetFormulier);
         }
@@ -120,38 +121,32 @@ formulierenLijst.onclick = function (event) {
 
     goedkeurKnopje.addEventListener('click', () => {
         console.log(hetFormulier.id);
-        
+
         xhr.open("PUT", `http://localhost:8082/api/formulier/update/statusgoed/${id}`, true);
         xhr.send();
 
-        xhr.onreadystatechange = function() {
-        if(xhr.readyState == 4) { 
-        location.reload(); 
-        } }
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                location.reload();
+            }
+        }
     })
     afkeurKnopje.addEventListener('click', () => {
         console.log(hetFormulier.id);
-        
+
         xhr.open("PUT", `http://localhost:8082/api/formulier/update/statusfout/${id}`, true);
         xhr.send();
 
-        xhr.onreadystatechange = function() {
-        if(xhr.readyState == 4) { 
-            location.reload(); 
-        } }
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                location.reload();
+            }
+        }
     })
 
 
-    
+
 
 };
 
-// goedkeurKnopje.addEventListener('click', () => {
-//     console.log("hij doet goedkeuren");
-// } )
-
-// document.querySelectorAll('.list-group-item')
-//         .forEach(el => el.attributes.href.value += window.location.search);
-
 laatFormulierenZien();
-
