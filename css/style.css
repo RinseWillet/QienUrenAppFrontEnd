@@ -20,6 +20,19 @@ i {
     font-size: 2em;
 }
 
+.fa-folder, .fa-folder-open {
+    min-width: 37.61px;
+}
+
+.folder-container:hover .fa-folder, .envelope-container:hover .fa-envelope, .door-container:hover .fa-door-closed, .user-container:hover .address-not-solid,
+.folder-container .fa-folder-open, .envelope-container .fa-envelope-open, .door-container .fa-door-open, .user-container .address-solid {
+    display: none;
+}
+
+.folder-container:hover .fa-folder-open, .envelope-container:hover .fa-envelope-open, .door-container:hover .fa-door-open, .user-container:hover .address-solid {
+    display: inline;
+}
+
 table {
     font-size: 0.8em;
 }
