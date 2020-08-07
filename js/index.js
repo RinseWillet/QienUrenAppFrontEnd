@@ -139,7 +139,3 @@ function formulierObjectMaken(){
     buttonSubmit.style.display = "none";
     buttonDownload.style.display = "none";
 }
-
-//Formulier JSON object 
-//Maand 0-11, Jaar, Dagen[]
-//Dag heeft datum, opdrachturen, overwerkuren, verlofuren, ziekuren, traininguren, overigeuren, verklaring
