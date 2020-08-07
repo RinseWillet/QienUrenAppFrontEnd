@@ -3,6 +3,8 @@ const maanden = ["Januari", "Februari", "Maart", "April", "Mei", "Juni", "Juli",
 let startJaar = new Date().getFullYear();
 let eindJaar = 2024;
 let huidigeDatum = new Date();
+let huidigJaar = huidigeDatum.getFullYear();
+let huidigMaand = huidigeDatum.getMonth();
 
 // DOM Elementen selecteren
 const selectMaand = document.getElementById("maanden-select");
@@ -15,19 +17,30 @@ const tableSelect = document.querySelector(".table-container");
 const buttonSubmit = document.querySelector(".btn-success");
 const buttonDownload = document.querySelector(".btn-danger");
 
+
 // Functies om de maanden en jaren te vullen
 const laadMaanden = () => {
     // maanden.forEach(e =>
     //     selectMaand.insertAdjacentHTML("beforeend", `<option value="${e}">${e}</option>`));
 
     for (let i = 0; i < maanden.length; i++) {
-        selectMaand.insertAdjacentHTML("beforeend", `<option value="${i}">${maanden[i]}</option>`);
+        if(i == huidigMaand) {
+            selectMaand.insertAdjacentHTML("beforeend", `<option value="${i}" selected="${huidigMaand}">${maanden[i]}</option>`);
+        }
+        else {
+            selectMaand.insertAdjacentHTML("beforeend", `<option value="${i}">${maanden[i]}</option>`);
+            }
     }
 }
 
 const laadJaren = () => {
     for (let i = startJaar; i < eindJaar; i++) {
+        if(i == huidigJaar) {
+            selectJaar.insertAdjacentHTML("beforeend", `<option value="${i}" selected="${huidigJaar}" >${i}</option>`);
+        }
+        else {
         selectJaar.insertAdjacentHTML("beforeend", `<option value="${i}">${i}</option>`);
+        } 
     }
 }
 
@@ -38,17 +51,9 @@ const dagenInMaand = (jaar, maand) => {
     return new Date(jaar, maand, 0).getDate();
 }
 
-const huidigeMaandEnJaar = () => {
-    let jaar = huidigeDatum.getFullYear();
-    let maand = huidigeDatum.getMonth();
-    selectMaand.insertAdjacentHTML("beforeend", `<option selected="${maand}" value="${maand}">${maanden[maand]}</option>`);
-    selectJaar.insertAdjacentHTML("beforeend", `<option selected="${jaar}" value="${jaar}">${jaar}</option>`);
-}
-
 window.onload = () => {
     laadMaanden();
     laadJaren();
-    huidigeMaandEnJaar();
     veranderMaandJaar();
 };
 
