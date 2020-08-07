@@ -98,7 +98,7 @@ main{
 }
 
 .list-group-item span {
-    pointer-events: none;
     padding: 0;
     width: 25%;
 }
+

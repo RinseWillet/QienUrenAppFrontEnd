@@ -48,10 +48,9 @@ const laatFormulierenZien = () => {
                     // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
                     // class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between"><span>Rinse Willet</span><span>${e.maand}</span><span>${e.jaar}</span><span>${e.formulierstatus}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    class="list-group-item list-group-item-action d-flex justify-content-between"><span id="${e.id}">Rinse Willet</span><span id="${e.id}">${e.maand}</span><span id="${e.id}">${e.jaar}</span><span id="${e.id}">${e.formulierstatus}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
-  
             } else {
                 console.log("in de else");
             inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen formulieren!</h4>
