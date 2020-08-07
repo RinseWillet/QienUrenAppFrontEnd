@@ -3,6 +3,8 @@ const formulierItem = document.querySelector(".list-group-item");
 const formBody = document.getElementById("form-body");
 const modalHeader = document.querySelector(".modal-title");
 const klikbaarOogje = document.querySelector(".fa-eye");
+const goedkeurKnopje = document.getElementById("goedkeuren");
+const afkeurKnopje = document.getElementById("afkeuren");
 
 const maandNummerNaarString = (maandNummer) => {
     switch(maandNummer) {
@@ -48,7 +50,7 @@ const laatFormulierenZien = () => {
                     // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
                     // class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between"><span id="${e.id}">Rinse Willet</span><span id="${e.id}">${e.maand}</span><span id="${e.id}">${e.jaar}</span><span id="${e.id}">${e.formulierstatus}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">Rinse Willet</span><span id="${e.id}">${e.maand}</span><span id="${e.id}">${e.jaar}</span><span id="${e.id}">${e.formulierStatus}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
             } else {
@@ -74,19 +76,19 @@ const laatFormulierenZien = () => {
 }
 
 const genereerFormulier = (formulier) => {
-    console.log(formulier.werkDagen)
-    modalHeader.innerHTML = `Sjarl | ${formulier.maand}/${formulier.jaar}`
+    formulier.maand = maandNummerNaarString(formulier.maand);
+    modalHeader.innerHTML = `Rinse Willet | ${formulier.maand}/${formulier.jaar}`
     for (let i = 0; i < formulier.werkDagen.length; i++) {
         formBody.insertAdjacentHTML("beforeend",
             `<tr id="dag-${i + 1}" class="formulier-rij">
             <th scope="row">${i + 1}</th>
-            <td><class="form-input" id="opdracht-uren-${i + 1}">${formulier.werkDagen[i].opdrachtUren}</td>
-            <td><class="form-input" id="overwerk-uren-${i + 1}">${formulier.werkDagen[i].overwerkUren}</td>
-            <td><class="form-input" id="verlof-uren-${i + 1}">${formulier.werkDagen[i].verlofUren}</td>
-            <td><class="form-input" id="ziekte-uren-${i + 1}">${formulier.werkDagen[i].ziekteUren}</td>
-            <td><class="form-input" id="training-uren-${i + 1}">${formulier.werkDagen[i].trainingsUren}</td>
-            <td><class="form-input" id="overig-uren-${i + 1}">${formulier.werkDagen[i].overigeUren}</td>
-            <td class="form-verklaring"><class="form-input" id="verklaring-overig-${i + 1}">${formulier.werkDagen[i].overigeUrenUitleg}</td>
+            <td class="admin-opmaak" id="opdracht-uren-${i + 1}">${formulier.werkDagen[i].opdrachtUren}</td>
+            <td class="admin-opmaak"id="overwerk-uren-${i + 1}">${formulier.werkDagen[i].overwerkUren}</td>
+            <td class="admin-opmaak"id="verlof-uren-${i + 1}">${formulier.werkDagen[i].verlofUren}</td>
+            <td class="admin-opmaak" id="ziekte-uren-${i + 1}">${formulier.werkDagen[i].ziekteUren}</td>
+            <td class="admin-opmaak"id="training-uren-${i + 1}">${formulier.werkDagen[i].trainingsUren}</td>
+            <td class="admin-opmaak"id="overig-uren-${i + 1}">${formulier.werkDagen[i].overigeUren}</td>
+            <td class="admin-opmaak form-verklaring"><class="form-input" id="verklaring-overig-${i + 1}">${formulier.werkDagen[i].overigeUrenUitleg}</td>
         </tr>`)
     }
 }
@@ -102,24 +104,51 @@ function getEventTarget(e) {
 
 formulierenLijst.onclick = function (event) {
     var target = getEventTarget(event);
-    console.log(event.target);
     let id = target.id;
+    let hetFormulier;
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function () {
-        let hetFormulier = JSON.parse(this.responseText);
-        console.log(hetFormulier);
+        hetFormulier = JSON.parse(this.responseText);
         if (xhr.readyState == 4) {
             verwijderFormulier();
             genereerFormulier(hetFormulier);
-            console.log(hetFormulier)
         }
     }
 
     xhr.open("GET", `http://localhost:8082/api/formulier/${id}`, true);
     xhr.send();
 
+    goedkeurKnopje.addEventListener('click', () => {
+        console.log(hetFormulier.id);
+        
+        xhr.open("PUT", `http://localhost:8082/api/formulier/update/statusgoed/${id}`, true);
+        xhr.send();
+
+        xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4) { 
+        location.reload(); 
+        } }
+    })
+    afkeurKnopje.addEventListener('click', () => {
+        console.log(hetFormulier.id);
+        
+        xhr.open("PUT", `http://localhost:8082/api/formulier/update/statusfout/${id}`, true);
+        xhr.send();
+
+        xhr.onreadystatechange = function() {
+        if(xhr.readyState == 4) { 
+            location.reload(); 
+        } }
+    })
+
+
+    
 
 };
+
+// goedkeurKnopje.addEventListener('click', () => {
+//     console.log("hij doet goedkeuren");
+// } )
 
 // document.querySelectorAll('.list-group-item')
 //         .forEach(el => el.attributes.href.value += window.location.search);

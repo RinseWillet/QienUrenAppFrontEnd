@@ -51,7 +51,7 @@
                             <li data-toggle="modal" data-target="#staticBackdrop"
                                 class="list-group-item list-group-header list-group-item-action d-flex justify-content-between"
                                 id="${e.id}">
-                                <span>Naam</span><span>Maand</span><span>Jaar</span><span>Status</span>
+                                <span>Naam</span><span>Maand</span><span>Jaar</span><span>Status</span><i class="far fa-eye transparant"></i>
                             </li>
 
                             <!-- Wordt gevuld door formulieren in database -->
@@ -90,8 +90,8 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Afsluiten</button>
-                                        <button type="button" class="btn btn-success">Goedkeuren</button>
-                                        <button type="button" class="btn btn-danger">Afkeuren</button>
+                                        <button type="button" class="btn btn-success" id="goedkeuren">Goedkeuren</button>
+                                        <button type="button" class="btn btn-danger" id="afkeuren">Afkeuren</button>
                                     </div>
                                 </div>
                             </div>
