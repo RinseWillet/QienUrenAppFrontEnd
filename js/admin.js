@@ -60,7 +60,6 @@ const laatFormulierenZien = () => {
                     class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">Rinse Willet</span><span id="${e.id}">${e.maand}</span><span id="${e.id}">${e.jaar}</span><span id="${e.id}">${e.formulierStatus}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
-
             } else {
                 console.log("in de else");
                 inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen formulieren!</h4>
