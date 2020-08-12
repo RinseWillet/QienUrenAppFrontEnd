@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     <section>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
@@ -26,16 +25,20 @@
                 <div class="collapse navbar-collapse w-100" id="navbarNav">
                     <ul class="ml-auto navbar-nav">
                         <li class="nav-item mr-3 user-container">
-                            <a class="nav-link" href="#"><i class="far fa-address-card address-not-solid"></i><i class="fas fa-address-card address-solid"></i></a>
+                            <a class="nav-link" href="#"><i class="far fa-address-card address-not-solid"></i><i
+                                    class="fas fa-address-card address-solid"></i></a>
                         </li>
                         <li class="nav-item mr-3 folder-container">
-                            <a class="nav-link" href="#"><i class="far fa-folder"></i><i class="far fa-folder-open"></i></a>
+                            <a class="nav-link" href="#"><i class="far fa-folder"></i><i
+                                    class="far fa-folder-open"></i></a>
                         </li>
                         <li class="nav-item mr-3 envelope-container">
-                            <a class="nav-link" href="#"><i class="far fa-envelope"></i><i class="far fa-envelope-open"></i></a>
+                            <a class="nav-link" href="#"><i class="far fa-envelope"></i><i
+                                    class="far fa-envelope-open"></i></a>
                         </li>
                         <li class="nav-item mr-3 door-container">
-                            <a class="nav-link" href="#"><i class="fas fa-door-closed"></i><i class="fas fa-door-open"></i></a>
+                            <a class="nav-link" href="#"><i class="fas fa-door-closed"></i><i
+                                    class="fas fa-door-open"></i></a>
                         </li>
                     </ul>
                 </div>
@@ -46,62 +49,252 @@
         <section>
             <div class="container">
                 <div class="row">
-                    <div class="col-9">
-                        <div class="list-group mt-5 mb-5" id="form-list">
-                            <li data-toggle="modal" data-target="#staticBackdrop"
-                                class="list-group-item list-group-header list-group-item-action d-flex justify-content-between"
-                                id="${e.id}">
-                                <span>Naam</span><span>Maand</span><span>Jaar</span><span>Status</span><i class="far fa-eye transparant"></i>
+                    <div class="col-8">
+                        <ul class="nav nav-tabs mt-2" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="medewerkers-tab-tab" data-toggle="tab"
+                                    href="#medewerkers-tab" role="tab" aria-controls="medewerkers-tab"
+                                    aria-selected="true">Medewerkers</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="bedrijven-tab-tab" data-toggle="tab" href="#bedrijven-tab"
+                                    role="tab" aria-controls="bedrijven-tab" aria-selected="false">Bedrijven</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="formulieren-tab-tab" data-toggle="tab" href="#formulieren-tab"
+                                    role="tab" aria-controls="formulieren-tab" aria-selected="false">Formulieren</a>
+                            </li>
+                        </ul>
 
-                            <!-- Wordt gevuld door formulieren in database -->
+                        <div class="tab-content">
 
-                        </div>
-                        <!-- Modal -->
-                        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
-                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
+                            <!-- MEDEWERKER TABBLAD -->
+
+                            <div class="tab-pane" id="medewerkers-tab" role="tabpanel"
+                                aria-labelledby="medewerkers-tab-tab">
+                                <form class="form-inline my-2 my-lg-0">
+                                    <input class="zoeken-input form-control mt-3 mb-3 mr-sm-2" type="search"
+                                        placeholder="Zoeken..." aria-label="Search">
+                                    <button class="btn btn-outline-purple my-2 my-sm-0" type="submit"><i
+                                            class="fas fa-search"></i></button>
+                                </form>
+                                <div class="list-group mb-5" id="medewerker-list">
+                                    <li data-toggle="modal" data-target="#staticBackdrop"
+                                        class="list-group-item list-group-header list-group-item-action d-flex justify-content-between"
+                                        id="${e.id}">
+                                        <span>Naam</span><span>Bedrijf</span><span>Type</span><i
+                                            class="far fa-eye transparant"></i>
+                                    </li>
+
+                                    <!-- Wordt gevuld door formulieren in database -->
+
+                                </div>
+                            </div>
+
+                            <!-- BEDRIJVEN TABBLAD -->
+
+                            <div class="tab-pane" id="bedrijven-tab" role="tabpanel"
+                                aria-labelledby="bedrijven-tab-tab">
+                                <form class="form-inline my-2 my-lg-0">
+                                    <input class="zoeken-input form-control mt-3 mb-3 mr-sm-2" type="search"
+                                        placeholder="Zoeken..." aria-label="Search">
+                                    <button class="btn btn-outline-purple my-2 my-sm-0" type="submit"><i
+                                            class="fas fa-search"></i></button>
+                                </form>
+                                <div class="list-group mb-5" id="bedrijven-list">
+                                    <li data-toggle="modal" data-target="#staticBackdrop"
+                                        class="list-group-item list-group-header list-group-item-action d-flex justify-content-between"
+                                        id="${e.id}">
+                                        <span>Naam</span><span>ContactPersoon</span><span>Gedetacheerden</span><i
+                                            class="far fa-eye transparant"></i>
+                                    </li>
+
+                                    <!-- Wordt gevuld door formulieren in database -->
+
+                                </div>
+                            </div>
+
+
+                            <!-- FORMULIEREN TABBLAD -->
+
+
+                            <div class="tab-pane" id="formulieren-tab" role="tabpanel"
+                                aria-labelledby="formulieren-tab-tab">
+                                <form class="form-inline my-2 my-lg-0">
+                                    <input class="zoeken-input form-control mt-3 mb-3 mr-sm-2" type="search"
+                                        placeholder="Zoeken..." aria-label="Search">
+                                    <button class="btn btn-outline-purple my-2 my-sm-0" type="submit"><i
+                                            class="fas fa-search"></i></button>
+                                </form>
+                                <div class="list-group mb-5" id="form-list">
+                                    <li data-toggle="modal" data-target="#staticBackdrop"
+                                        class="list-group-item list-group-header list-group-item-action d-flex justify-content-between"
+                                        id="${e.id}">
+                                        <span>Naam</span><span>Maand</span><span>Jaar</span><span>Status</span><i
+                                            class="far fa-eye transparant"></i>
+                                    </li>
+
+                                    <!-- Wordt gevuld door formulieren in database -->
+
+                                </div>
+
+                                <!-- Modal FORMULIEREN -->
+
+                                <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="container">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Datum</th>
+                                                            <th scope="col">Opdracht</th>
+                                                            <th scope="col">Overwerk</th>
+                                                            <th scope="col">Verlof</th>
+                                                            <th scope="col">Ziek</th>
+                                                            <th scope="col">Training</th>
+                                                            <th scope="col">Overig</th>
+                                                            <th scope="col">Verklaring m.b.t. overig</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="form-body">
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Afsluiten</button>
+                                                <button type="button" class="btn btn-success"
+                                                    id="goedkeuren">Goedkeuren</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    id="afkeuren">Afkeuren</button>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="modal-body">
-                                        <table class="table table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">Datum</th>
-                                                    <th scope="col">Opdracht</th>
-                                                    <th scope="col">Overwerk</th>
-                                                    <th scope="col">Verlof</th>
-                                                    <th scope="col">Ziek</th>
-                                                    <th scope="col">Training</th>
-                                                    <th scope="col">Overig</th>
-                                                    <th scope="col">Verklaring m.b.t. overig</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="form-body">
-
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Afsluiten</button>
-                                        <button type="button" class="btn btn-success" id="goedkeuren">Goedkeuren</button>
-                                        <button type="button" class="btn btn-danger" id="afkeuren">Afkeuren</button>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-4">
+
+                        <div class="row-admin-sidebar mt-5 d-flex align-items-center justify-content-around">
+                            <button type="button"
+                                class="btn btn-purple d-flex justify-content-between align-items-center"><i
+                                    class="fas fa-user-plus"></i>Voeg relatie toe</button>
+                            <i class="fas fa-info-circle ml-2" data-toggle="popover" data-placement="bottom"
+                                title="Uitleg relatie toevoegen"
+                                data-content="Met deze knop kunt u een medewerker, een trainee, een klantcontactpersoon, of een bedrijf toevoegen"></i>
+                        </div>
+
+                        <div class="row-admin-sidebar mt-2 d-flex align-items-center justify-content-around">
+                            <button type="button"
+                                class="btn btn-purple d-flex justify-content-between align-items-center"><i
+                                    class="fas fa-link"></i>Koppel relatie</button>
+                            <i class="fas fa-info-circle ml-2" data-toggle="popover" data-placement="bottom"
+                                title="Uitleg koppel relatie"
+                                data-content="Met deze knop kunt u een medewerker, een trainee, een klantcontactpersoon aan een bedrijf koppelen"></i>
+                        </div>
+
+                        <div class="row-admin-sidebar justify-content-around mt-4 mb-2">
+                            <div class="col">
+                                <!-- <label for="maanden-select">Geselecteerde maand: </label> -->
+                                <select id="maanden-select" required>
+                                    <option>--Maand--</option>
+                                    <!-- Maanden worden gevuld vanuit index.js -->
+                                </select>
+                            </div>
+                            <div class="col">
+                                <!-- <label for="jaren-select">Geselecteerd jaar</label> -->
+                                <select id="jaren-select" required>
+                                    <option>--Jaar--</option>
+                                    <!-- Jaren worden gevuld vanuit index.js -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title">Status Urenformulieren</h5>
+                                <div class="row-admin-sidebar justify-content-between">
+                                    <h6 class="card-subtitle mb-2 text-muted">Goedgekeurd</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">360</h6>
+                                </div>
+                                <div class="row-admin-sidebar justify-content-between">
+                                    <h6 class="card-subtitle mb-2 text-muted">Openstaand</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">360</h6>
+                                </div>
+                                <div class="row-admin-sidebar justify-content-between">
+                                    <h6 class="card-subtitle mb-2 text-muted">Verzonden</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">360</h6>
+                                </div>
+                                <div class="row-admin-sidebar justify-content-between">
+                                    <h6 class="card-subtitle mb-2 text-muted">In afwachting</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">360</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h5 class="card-title">Overzicht uren</h5>
+                                <div class="row-admin-sidebar justify-content-between">
+                                    <h6 class="card-subtitle mb-2 text-muted">Ziekteuren</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">240</h6>
+                                </div>
+                                <div class="row-admin-sidebar justify-content-between">
+                                    <h6 class="card-subtitle mb-2 text-muted">Verlofuren</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">240</h6>
+                                </div>
+                                <div class="row-admin-sidebar justify-content-between">
+                                    <h6 class="card-subtitle mb-2 text-muted">Overuren</h6>
+                                    <h6 class="card-subtitle mb-2 text-muted">240</h6>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Bericht versturen</h5>
+                                <form class="form-inline my-2 my-lg-0">
+                                    <div class="row-admin-sidebar align-items-center justify-content-between mb-2">
+                                        <h6 class="card-subtitle mb-2 text-muted">Aan</h6>
+                                        <div>
+                                            <select id="medewerker-select" class="select-admin-sidebar">
+                                                <option>--Medewerker--</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <textarea id="text-admin-sidebar"></textarea>
+                                    <button class="btn btn-purple mt-2">Verzenden</button>
+
+                                    <!-- <input class="zoeken-input form-control mt-3 mb-3 mr-sm-2" type="search"
+                                        placeholder="zoek medewerker" aria-label="Search">
+                                    <button class="btn btn-outline-purple my-2 my-sm-0" type="submit"><i
+                                            class="fas fa-search"></i></button> -->
+                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            </div>
         </section>
     </main>
-    <footer>
+    <footer class="mt-3">
         <div class="container">
             <span>COPYRIGHT &copy; 2020 QIEN</span>
         </div>
@@ -117,6 +310,22 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
         integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
         crossorigin="anonymous"></script>
+
+
+    <!-- Deze functie (JQuery) is om de popovers te maken -->
+
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+    </script>
+
+    <!-- functie voor tabbladen -->
+    <script>
+        $(function () {
+            $('#myTab li:last-child a').tab('show')
+        })
+    </script>
 
 </body>
 

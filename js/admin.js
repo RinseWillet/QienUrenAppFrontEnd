@@ -1,4 +1,6 @@
 const formulierenLijst = document.getElementById("form-list");
+const medewerkerLijst = document.getElementById("medewerker-list");
+const bedrijvenLijst = document.getElementById("bedrijven-list");
 const formulierItem = document.querySelector(".list-group-item");
 const formBody = document.getElementById("form-body");
 const modalHeader = document.querySelector(".modal-title");
@@ -34,6 +36,10 @@ const maandNummerNaarString = (maandNummer) => {
             return "December";
     }
 }
+
+/*
+FORMULIEREN
+*/ 
 
 const laatFormulierenZien = () => {
     let xhr = new XMLHttpRequest();
@@ -149,4 +155,96 @@ formulierenLijst.onclick = function (event) {
 
 };
 
+/*
+MEDEWERKERS
+*/ 
+
+const laatMedewerkersZien = () => {
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            deMedewerkers = JSON.parse(this.responseText);
+            let inTeVoegenHTML = ``;
+
+            if (deMedewerkers.length > 0) {
+                console.log("in de if");
+                deMedewerkers.forEach((e) => {
+                    inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.opdrachtgever}</span><span id="${e.id}">Medewerker</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    medewerkerLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+                })
+
+            } else {
+                console.log("in de else");
+                inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen medewerkers!</h4>
+                <p>tekst - veel plezier</p>
+                <hr>
+                <p class="mb-0">text - nog meer plezier.</p>
+            </div>`;
+
+
+                console.log(inTeVoegenHTML);
+                medewerkerLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+            }
+            // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+            //             Launch static backdrop modal
+            //         </button>
+        }
+    }
+
+    xhr.open("GET", "http://localhost:8082/api/admin/medewerker/all", true);
+    xhr.send();
+}
+
+/*
+BEDRIJVEN
+*/ 
+
+const laatBedrijvenZien = () => {
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            deBedrijven = JSON.parse(this.responseText);
+            let inTeVoegenHTML = ``;
+
+            if (deBedrijven.length > 0) {
+                console.log("in de if");
+                deBedrijven.forEach((e) => {
+                    inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.klantContacPersoon}</span><span id="${e.id}">100</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    bedrijvenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+                })
+
+            } else {
+                console.log("in de else");
+                inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen medewerkers!</h4>
+                <p>tekst - veel plezier</p>
+                <hr>
+                <p class="mb-0">text - nog meer plezier.</p>
+            </div>`;
+
+
+                console.log(inTeVoegenHTML);
+                bedrijvenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+            }
+            // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+            //             Launch static backdrop modal
+            //         </button>
+        }
+    }
+
+    xhr.open("GET", "http://localhost:8082/api/admin/bedrijf/all", true);
+    xhr.send();
+}
+
+
+
+/*
+AANROEPEN VAN METHODES BIJ OPENEN PAGINA
+*/ 
+
 laatFormulierenZien();
+laatMedewerkersZien();
+laatBedrijvenZien();
