@@ -202,7 +202,7 @@
                         </div>
 
                         <!-- Modal Voeg gebruiker toe-->
-                        
+
                         <div class="modal fade" id="voegGebruikerToeModal" tabindex="-1"
                             aria-labelledby="voegGebruikerToeModal" aria-hidden="true">
                             <div class="modal-dialog">
@@ -220,109 +220,126 @@
                                                     <label for="toevoegen-select-type">Wat voor soort relatie wilt u
                                                         aanmaken? </label>
                                                     <br>
+
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio"
-                                                            name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                                        <label class="form-check-label" for="inlineRadio1">Interne
+                                                            name="inlineRadioOptions" id="radio-interne-mw"
+                                                            value="InterneMedewerker" checked>
+                                                        <label class="form-check-label" for="radio-interne-mw">Interne
                                                             Medewerker</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio"
-                                                            name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                                            name="inlineRadioOptions" id="radio-trainee"
+                                                            value="Trainee">
                                                         <label class="form-check-label"
-                                                            for="inlineRadio2">Trainee</label>
+                                                            for="radio-trainee">Trainee</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio"
-                                                            name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                                            name="inlineRadioOptions" id="radio-bedrijf"
+                                                            value="Bedrijf">
                                                         <label class="form-check-label"
-                                                            for="inlineRadio3">Bedrijf</label>
+                                                            for="radio-bedrijf">Bedrijf</label>
                                                     </div>
                                                     <div class="form-check form-check-inline">
                                                         <input class="form-check-input" type="radio"
-                                                            name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                                                            name="inlineRadioOptions" id="radio-contactpersoon"
+                                                            value="ContactPersoon">
                                                         <label class="form-check-label"
-                                                            for="inlineRadio4">Contactpersoon
+                                                            for="radio-contactpersoon">Contactpersoon
                                                             Bedrijf</label>
                                                     </div>
                                                 </div>
 
-                                                <div class="interne-mw-form">
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <div class="form-group">
-                                                                <label for="interne-mw-naam">Naam</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="interne-mw-naam" placeholder="Naam medewerker">
+                                                <div id="toevoegen-gebruiker-container">
+                                                    <div class="interne-mw-form">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="interne-mw-naam">Naam</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="interne-mw-naam"
+                                                                        placeholder="Naam medewerker">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="interne-mw-email">Email address</label>
+                                                                    <input type="email" class="form-control"
+                                                                        id="interne-mw-email"
+                                                                        placeholder="naam@qien.nl">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label
+                                                                        for="interne-mw-telefoon">Telefoonnummer</label>
+                                                                    <input type="telnum" class="form-control"
+                                                                        id="interne-mw-telefoon"
+                                                                        placeholder="+31 6 00000000">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-4">
-                                                            <div class="form-group">
-                                                                <label for="interne-mw-email">Email address</label>
-                                                                <input type="email" class="form-control"
-                                                                    id="interne-mw-email" placeholder="naam@qien.nl">
+
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label
+                                                                        for="interne-mw-straatnaamennummer">Adres</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="interne-mw-straatnaamennummer"
+                                                                        placeholder="Atoomweg 350B">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="interne-mw-postcode">Postcode</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="interne-mw-postcode" placeholder="3542AB">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label
+                                                                        for="interne-mw-woonplaats">Woonplaats</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="interne-mw-woonplaats"
+                                                                        placeholder="Utrecht">
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="col-4">
-                                                            <div class="form-group">
-                                                                <label for="interne-mw-telefoon">Telefoonnummer</label>
-                                                                <input type="telnum" class="form-control"
-                                                                    id="interne-mw-telefoon"
-                                                                    placeholder="+31 6 00000000">
+
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label
+                                                                        for="interne-mw-startdatum">Startdatum</label>
+                                                                    <input type="date" class="form-control"
+                                                                        id="interne-mw-startdatum" min="01-01-2020">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-4">
+                                                                <div class="form-group">
+                                                                    <label for="interne-mw-einddatum">Einddatum</label>
+                                                                    <input type="date" class="form-control"
+                                                                        id="interne-mw-einddatum" min="01-01-2020">
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <div class="form-group">
-                                                                <label for="interne-mw-straatnaamennummer">Adres</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="interne-mw-straatnaamennummer"
-                                                                    placeholder="Atoomweg 350B">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="form-group">
-                                                                <label for="interne-mw-postcode">Postcode</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="interne-mw-postcode" placeholder="3542AB">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="form-group">
-                                                                <label for="interne-mw-woonplaats">Woonplaats</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="interne-mw-woonplaats" placeholder="Utrecht">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-                                                        <div class="col-4">
-                                                            <div class="form-group">
-                                                                <label for="interne-mw-startdatum">Startdatum</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="interne-mw-startdatum" min="01-01-2020">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-4">
-                                                            <div class="form-group">
-                                                                <label for="interne-mw-postcode">Einddatum</label>
-                                                                <input type="date" class="form-control"
-                                                                    id="interne-mw-einddatum" min="01-01-2020">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
                                                 </div>
 
                                             </form>
+
+                                            
+
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Scherm
                                                 Afsluiten</button>
-                                            <button type="button" class="btn btn-success">Relatie
+                                            <button type="button" class="btn btn-success"
+                                                id="knop-relatie-aanmaken">Relatie
                                                 aanmaken</button>
                                         </div>
                                     </div>
