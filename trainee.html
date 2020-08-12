@@ -68,12 +68,52 @@
                             <h2 class="float-left">AFGELOPEN 3 MAANDEN</h2>
                             <i class="fas fa-mail-bulk"></i></i>
 
-                            <div class="list-group mb-5" id="form-list">
+                            <div class="list-group float-left w-100" id="afgelopen-formulieren">
+                                
 
                                 <!-- Wordt gevuld door formulieren in database     data-toggle="modal" data-target="#staticBackdrop"-->
-
+                                
                             </div>
 
+                            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false"
+                                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="container">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Datum</th>
+                                                                <th scope="col">Opdracht</th>
+                                                                <th scope="col">Overwerk</th>
+                                                                <th scope="col">Verlof</th>
+                                                                <th scope="col">Ziek</th>
+                                                                <th scope="col">Training</th>
+                                                                <th scope="col">Overig</th>
+                                                                <th scope="col">Verklaring m.b.t. overig</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="form-body">
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Afsluiten</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                         </div>
                     </div>
                 </div>
@@ -104,6 +144,16 @@
     </footer>
 
     <script src="js/trainee.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
+    integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
+    crossorigin="anonymous"></script>
 
 </body>
 
