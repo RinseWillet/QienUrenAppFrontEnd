@@ -39,7 +39,7 @@ const maandNummerNaarString = (maandNummer) => {
 
 /*
 FORMULIEREN
-*/ 
+*/
 
 const laatFormulierenZien = () => {
     let xhr = new XMLHttpRequest();
@@ -158,7 +158,7 @@ formulierenLijst.onclick = function (event) {
 
 /*
 MEDEWERKERS
-*/ 
+*/
 
 const laatMedewerkersZien = () => {
     let xhr = new XMLHttpRequest();
@@ -171,8 +171,19 @@ const laatMedewerkersZien = () => {
             if (deMedewerkers.length > 0) {
                 console.log("in de if");
                 deMedewerkers.forEach((e) => {
+                    // Als trainee geen opdrachtgever heeft dan veranderen naar "Niet geplaatst"
+                    if (e.type === "Trainee" && e.opdrachtgever === null) {
+                        e.opdrachtgever = {
+                            "naam": "Niet geplaatst"
+                        }
+                    } else if (e.type === "InterneMedewerker") {
+                        e.type = "Interne Medewerker";
+                        e.opdrachtgever = {
+                            "naam": "Qien"
+                        }
+                    }
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.opdrachtgever.naam}</span><span id="${e.id}">Medewerker</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.opdrachtgever.naam}</span><span id="${e.id}">${e.type}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     medewerkerLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
 
@@ -200,10 +211,11 @@ const laatMedewerkersZien = () => {
 
 /*
 BEDRIJVEN
-*/ 
+*/
 
 const laatBedrijvenZien = () => {
     let xhr = new XMLHttpRequest();
+    
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
@@ -213,14 +225,22 @@ const laatBedrijvenZien = () => {
             if (deBedrijven.length > 0) {
                 console.log("in de if");
                 deBedrijven.forEach((e) => {
+                    // Als bedrijf geen contactpersoon heeft dan veranderen naar "Niet gekoppeld"
+                    if (e.contactPersoon === null) {
+                        e.contactPersoon = {
+                            "naam": "Niet gekoppeld"
+                        }
+                    }
+
+
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.klantContacPersoon}</span><span id="${e.id}">100</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.contactPersoon.naam}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     bedrijvenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
 
             } else {
                 console.log("in de else");
-                inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen medewerkers!</h4>
+                inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen bedrijven!</h4>
                 <p>tekst - veel plezier</p>
                 <hr>
                 <p class="mb-0">text - nog meer plezier.</p>
@@ -240,11 +260,15 @@ const laatBedrijvenZien = () => {
     xhr.send();
 }
 
+/*
+RELATIE AANMAKEN
+*/
+
 
 
 /*
 AANROEPEN VAN METHODES BIJ OPENEN PAGINA
-*/ 
+*/
 
 laatFormulierenZien();
 laatMedewerkersZien();
