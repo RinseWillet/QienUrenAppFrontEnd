@@ -200,3 +200,33 @@ font-size: 1em;
     height: 80px;
 
 }
+
+
+/* Trainee css */
+
+.welkom{
+    font-size: 1.6em;
+    color: white;
+}
+
+h2{
+    font-size: 1.5em;
+    width: 90%;
+}
+
+.calender{
+    width: 15%;
+}
+
+.h2-uren-invullen{
+    width: 70%;
+}
+
+.decoration{
+    color: #9B9B9B;
+}
+
+.decoration:hover{
+    text-decoration: none;
+    color: #9D3FF3; 
+}
