@@ -7,6 +7,8 @@ const modalHeader = document.querySelector(".modal-title");
 const klikbaarOogje = document.querySelector(".fa-eye");
 const goedkeurKnopje = document.getElementById("goedkeuren");
 const afkeurKnopje = document.getElementById("afkeuren");
+const relatieAanmakenKnop = document.getElementById("knop-relatie-aanmaken");
+const toevoegenGebruikerContainer = document.getElementById("toevoegen-gebruiker-container");
 
 const maandNummerNaarString = (maandNummer) => {
     switch (maandNummer) {
@@ -263,7 +265,200 @@ const laatBedrijvenZien = () => {
 RELATIE AANMAKEN
 */
 
+const interneMedewerkerRadio = document.getElementById("radio-interne-mw");
+const interneMedewerkerNaam = document.getElementById("interne-mw-naam");
+const interneMedewerkerEmail = document.getElementById("interne-mw-email");
+const interneMedewerkerTelefoon = document.getElementById("interne-mw-telefoon");
+const interneMedewerkerStraatNaamEnNr = document.getElementById("interne-mw-straatnaamennummer");
+const interneMedewerkerPostcode = document.getElementById("interne-mw-postcode");
+const interneMedewerkerWoonPlaats = document.getElementById("interne-mw-woonplaats");
+const interneMedewerkerStartDatum = document.getElementById("interne-mw-startdatum");
+const interneMedewerkerEindDatum = document.getElementById("interne-mw-einddatum");
 
+const traineeRadio = document.getElementById("radio-trainee");
+const bedrijfRadio = document.getElementById("radio-bedrijf");
+const contactPersoonRadio = document.getElementById("radio-contactpersoon");
+
+relatieAanmakenKnop.addEventListener("click", () => {
+    var xhr = new XMLHttpRequest();
+    if (interneMedewerkerRadio.checked) {
+        let typeRelatie = interneMedewerkerRadio.value;
+        let naam = interneMedewerkerNaam.value;
+        let email = interneMedewerkerEmail.value;
+        let tel = interneMedewerkerTelefoon.value;
+        let straatNaamEnNr = interneMedewerkerStraatNaamEnNr.value;
+        let postCode = interneMedewerkerPostcode.value;
+        let woonPlaats = interneMedewerkerWoonPlaats.value; 
+        let startDatum = interneMedewerkerStartDatum.value;
+        let eindDatum = interneMedewerkerEindDatum.value;
+    
+        let interneMedewerkerJSON = {};
+        interneMedewerkerJSON.type = typeRelatie;
+        interneMedewerkerJSON.naam = naam;
+        interneMedewerkerJSON.emailadres = email;
+        interneMedewerkerJSON.telefoonnr = tel;
+        interneMedewerkerJSON.straatNaamNr = straatNaamEnNr;
+        interneMedewerkerJSON.postcode = postCode;
+        interneMedewerkerJSON.woonplaats = woonPlaats;
+        interneMedewerkerJSON.startDatum = startDatum;
+        interneMedewerkerJSON.eindDatum = eindDatum;
+        console.log(interneMedewerkerJSON);
+    
+        xhr.open("POST", "http://localhost:8082/api/admin/internemedewerker/nieuw", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(JSON.stringify(interneMedewerkerJSON));
+    } 
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            location.reload();
+        }
+    }
+    
+})
+
+const radios = document.querySelectorAll(".form-check-input")
+var prev = null;
+for (var i = 0; i < radios.length; i++) {
+    radios[i].addEventListener('change', function() {
+        (prev) ? prev.value : null;
+        if (this !== prev) {
+            prev = this;
+        }
+        if (this.value == "Trainee") {
+            toevoegenGebruikerContainer.innerHTML = `<h1>trainee</h1>`
+        } else if (this.value == "Bedrijf") {
+            toevoegenGebruikerContainer.innerHTML = `<div class="bedrijf-form">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="bedrijf-naam">Naam</label>
+                        <input type="text" class="form-control" id="bedrijf-naam"
+                            placeholder="Naam bedrijf">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="bedrijf-email">Email address</label>
+                        <input type="email" class="form-control" id="bedrijf-email"
+                            placeholder="info@bedrijf.nl">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="bedrijf-telefoon">Telefoonnummer</label>
+                        <input type="telnum" class="form-control"
+                            id="bedrijf-telefoon" placeholder="+31 6 00000000">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="bedrijf-straatnaamennummer">Adres</label>
+                        <input type="text" class="form-control"
+                            id="bedrijf-straatnaamennummer"
+                            placeholder="Atoomweg 350B">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="bedrijf-postcode">Postcode</label>
+                        <input type="text" class="form-control"
+                            id="bedrijf-postcode" placeholder="3542AB">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="bedrijf-woonplaats">Woonplaats</label>
+                        <input type="text" class="form-control"
+                            id="bedrijf-woonplaats" placeholder="Utrecht">
+                    </div>
+                </div>
+            </div>
+        </div>`
+        } else if (this.value == "ContactPersoon") {
+            toevoegenGebruikerContainer.innerHTML = `<h1>contactpersoon</h1>`
+        } else {
+            toevoegenGebruikerContainer.innerHTML = `<div class="interne-mw-form">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="interne-mw-naam">Naam</label>
+                        <input type="text" class="form-control"
+                            id="interne-mw-naam"
+                            placeholder="Naam medewerker">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="interne-mw-email">Email address</label>
+                        <input type="email" class="form-control"
+                            id="interne-mw-email"
+                            placeholder="naam@qien.nl">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="interne-mw-telefoon">Telefoonnummer</label>
+                        <input type="telnum" class="form-control"
+                            id="interne-mw-telefoon"
+                            placeholder="+31 6 00000000">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="interne-mw-straatnaamennummer">Adres</label>
+                        <input type="text" class="form-control"
+                            id="interne-mw-straatnaamennummer"
+                            placeholder="Atoomweg 350B">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="interne-mw-postcode">Postcode</label>
+                        <input type="text" class="form-control"
+                            id="interne-mw-postcode" placeholder="3542AB">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="interne-mw-woonplaats">Woonplaats</label>
+                        <input type="text" class="form-control"
+                            id="interne-mw-woonplaats"
+                            placeholder="Utrecht">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="interne-mw-startdatum">Startdatum</label>
+                        <input type="date" class="form-control"
+                            id="interne-mw-startdatum" min="01-01-2020">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="interne-mw-einddatum">Einddatum</label>
+                        <input type="date" class="form-control"
+                            id="interne-mw-einddatum" min="01-01-2020">
+                    </div>
+                </div>
+            </div>
+        </div>`
+        }
+    });
+}
 
 /*
 AANROEPEN VAN METHODES BIJ OPENEN PAGINA
