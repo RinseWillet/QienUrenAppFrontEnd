@@ -244,65 +244,107 @@ const laatBedrijvenZien = () => {
 RELATIE AANMAKEN
 */
 
-
+// RADIO buttons ophalen
 const interneMedewerkerRadio = document.getElementById("radio-interne-mw");
 const traineeRadio = document.getElementById("radio-trainee");
 const bedrijfRadio = document.getElementById("radio-bedrijf");
-
-const bedrijfNaam = document.getElementById("bedrijf-naam");
-const bedrijfEmail = document.getElementById("bedrijf-email");
-const bedrijfTelefoon = document.getElementById("bedrijf-telefoon");
-const bedrijfStraatNaamEnNr = document.getElementById("bedrijf-straatnaamennummer");
-const bedrijfPostCode = document.getElementById("bedrijf-postcode");
-const bedrijfWoonplaats = document.getElementById("bedrijf-woonplaats");
-
 const contactPersoonRadio = document.getElementById("radio-contactpersoon");
 
 relatieAanmakenKnop.addEventListener("click", () => {
     var xhr = new XMLHttpRequest();
     if (interneMedewerkerRadio.checked) {
-        const interneMedewerkerNaam = document.getElementById("interne-mw-naam");
-        const interneMedewerkerEmail = document.getElementById("interne-mw-email");
-        const interneMedewerkerTelefoon = document.getElementById("interne-mw-telefoon");
-        const interneMedewerkerStraatNaamEnNr = document.getElementById("interne-mw-straatnaamennummer");
-        const interneMedewerkerPostcode = document.getElementById("interne-mw-postcode");
-        const interneMedewerkerWoonPlaats = document.getElementById("interne-mw-woonplaats");
-        const interneMedewerkerStartDatum = document.getElementById("interne-mw-startdatum");
-        const interneMedewerkerEindDatum = document.getElementById("interne-mw-einddatum");
-
-        let typeRelatie = interneMedewerkerRadio.value;
-        let naam = interneMedewerkerNaam.value;
-        let email = interneMedewerkerEmail.value;
-        let tel = interneMedewerkerTelefoon.value;
-        let straatNaamEnNr = interneMedewerkerStraatNaamEnNr.value;
-        let postCode = interneMedewerkerPostcode.value;
-        let woonPlaats = interneMedewerkerWoonPlaats.value;
-        let startDatum = interneMedewerkerStartDatum.value;
-        let eindDatum = interneMedewerkerEindDatum.value;
+        const interneMedewerkerType = interneMedewerkerRadio.value;
+        const interneMedewerkerNaam = document.getElementById("interne-mw-naam").value;
+        const interneMedewerkerEmail = document.getElementById("interne-mw-email").value;
+        const interneMedewerkerTelefoon = document.getElementById("interne-mw-telefoon").value;
+        const interneMedewerkerStraatNaamEnNr = document.getElementById("interne-mw-straatnaamennummer").value;
+        const interneMedewerkerPostcode = document.getElementById("interne-mw-postcode").value;
+        const interneMedewerkerWoonPlaats = document.getElementById("interne-mw-woonplaats").value;
+        const interneMedewerkerStartDatum = document.getElementById("interne-mw-startdatum").value;
+        const interneMedewerkerEindDatum = document.getElementById("interne-mw-einddatum").value;
 
         let interneMedewerkerJSON = {};
-        interneMedewerkerJSON.type = typeRelatie;
-        interneMedewerkerJSON.naam = naam;
-        interneMedewerkerJSON.emailadres = email;
-        interneMedewerkerJSON.telefoonnr = tel;
-        interneMedewerkerJSON.straatNaamNr = straatNaamEnNr;
-        interneMedewerkerJSON.postcode = postCode;
-        interneMedewerkerJSON.woonplaats = woonPlaats;
-        interneMedewerkerJSON.startDatum = startDatum;
-        interneMedewerkerJSON.eindDatum = eindDatum;
+        interneMedewerkerJSON.type = interneMedewerkerType;
+        interneMedewerkerJSON.naam = interneMedewerkerNaam;
+        interneMedewerkerJSON.emailadres = interneMedewerkerEmail;
+        interneMedewerkerJSON.telefoonnr = interneMedewerkerTelefoon;
+        interneMedewerkerJSON.straatNaamNr = interneMedewerkerStraatNaamEnNr;
+        interneMedewerkerJSON.postcode = interneMedewerkerPostcode;
+        interneMedewerkerJSON.woonplaats = interneMedewerkerWoonPlaats;
+        interneMedewerkerJSON.startDatum = interneMedewerkerStartDatum;
+        interneMedewerkerJSON.eindDatum = interneMedewerkerEindDatum;
 
 
         xhr.open("POST", "http://localhost:8082/api/admin/internemedewerker/nieuw", true);
         xhr.setRequestHeader("Content-Type", "application/json");
 
-        console.log(interneMedewerkerNaam.value)
-        console.log(interneMedewerkerJSON);
-        console.log(JSON.stringify(interneMedewerkerJSON));
-
         xhr.send(JSON.stringify(interneMedewerkerJSON));
     }
     if (bedrijfRadio.checked) {
+        const bedrijfNaam = document.getElementById("bedrijf-naam").value;
+        const bedrijfEmail = document.getElementById("bedrijf-email").value;
+        const bedrijfTelefoon = document.getElementById("bedrijf-telefoon").value;
+        const bedrijfStraatNaamEnNr = document.getElementById("bedrijf-straatnaamennummer").value;
+        const bedrijfPostCode = document.getElementById("bedrijf-postcode").value;
+        const bedrijfWoonplaats = document.getElementById("bedrijf-woonplaats").value;
 
+        let bedrijfJSON = {};
+        bedrijfJSON.naam = bedrijfNaam;
+        bedrijfJSON.emailadres = bedrijfEmail;
+        bedrijfJSON.telefoonnr = bedrijfTelefoon;
+        bedrijfJSON.straatNaamNr = bedrijfStraatNaamEnNr;
+        bedrijfJSON.postcode = bedrijfPostCode;
+        bedrijfJSON.woonplaats = bedrijfWoonplaats;
+
+        xhr.open("POST", "http://localhost:8082/api/admin/bedrijf/nieuw", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(JSON.stringify(bedrijfJSON));
+    }
+    if (traineeRadio.checked) {
+        const traineeType = traineeRadio.value;
+        const traineeNaam = document.getElementById("trainee-naam").value;
+        const traineeEmail = document.getElementById("trainee-email").value;
+        const traineeTelefoon = document.getElementById("trainee-telefoon").value;
+        const traineeStraatNaamEnNr = document.getElementById("trainee-straatnaamennummer").value;
+        const traineePostcode = document.getElementById("trainee-postcode").value;
+        const traineeWoonPlaats = document.getElementById("trainee-woonplaats").value;
+        const traineeStartDatum = document.getElementById("trainee-startdatum").value;
+        const traineeEindDatum = document.getElementById("trainee-einddatum").value;
+
+        let traineeJSON = {};
+        traineeJSON.type = traineeType;
+        traineeJSON.naam = traineeNaam;
+        traineeJSON.emailadres = traineeEmail;
+        traineeJSON.telefoonnr = traineeTelefoon;
+        traineeJSON.straatNaamNr = traineeStraatNaamEnNr;
+        traineeJSON.postcode = traineePostcode;
+        traineeJSON.woonplaats = traineeWoonPlaats;
+        traineeJSON.startDatum = traineeStartDatum;
+        traineeJSON.eindDatum = traineeEindDatum;
+
+
+        xhr.open("POST", "http://localhost:8082/api/admin/trainee/nieuw", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(JSON.stringify(traineeJSON));
+    }
+    if (contactPersoonRadio.checked) {
+        const contactPersoonType = contactPersoonRadio.value;
+        const contactPersoonNaam = document.getElementById("contactpersoon-naam").value;
+        const contactPersoonEmail = document.getElementById("contactpersoon-email").value;
+        const contactPersoonTelefoon = document.getElementById("contactpersoon-telefoon").value;
+
+        let contactPersoonJSON = {};
+        contactPersoonJSON.type = contactPersoonType;
+        contactPersoonJSON.naam = contactPersoonNaam;
+        contactPersoonJSON.emailadres = contactPersoonEmail;
+        contactPersoonJSON.telefoonnr = contactPersoonTelefoon;
+
+        xhr.open("POST", "http://localhost:8082/api/admin/klantcontactpersoon/nieuw", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.send(JSON.stringify(contactPersoonJSON));
     }
 
     xhr.onreadystatechange = function () {
@@ -322,7 +364,81 @@ for (var i = 0; i < radios.length; i++) {
             prev = this;
         }
         if (this.value == "Trainee") {
-            toevoegenGebruikerContainer.innerHTML = `<h1>trainee</h1>`
+            toevoegenGebruikerContainer.innerHTML = `<div class="interne-mw-form">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="trainee-naam">Naam</label>
+                        <input type="text" class="form-control"
+                            id="trainee-naam"
+                            placeholder="Naam trainee" required="required">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="trainee-email">Email</label>
+                        <input type="email" class="form-control"
+                            id="trainee-email"
+                            placeholder="trainee@mail.com">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="trainee-telefoon">Telefoonnummer</label>
+                        <input type="telnum" class="form-control"
+                            id="trainee-telefoon"
+                            placeholder="+31 6 00000000">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="trainee-straatnaamennummer">Adres</label>
+                        <input type="text" class="form-control"
+                            id="trainee-straatnaamennummer"
+                            placeholder="Atoomweg 350B">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="trainee-postcode">Postcode</label>
+                        <input type="text" class="form-control"
+                            id="trainee-postcode" placeholder="3542AB">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="trainee-woonplaats">Woonplaats</label>
+                        <input type="text" class="form-control"
+                            id="trainee-woonplaats"
+                            placeholder="Utrecht">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="trainee-startdatum">Startdatum</label>
+                        <input type="date" class="form-control"
+                            id="trainee-startdatum" min="01-01-2020">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="trainee-einddatum">Einddatum</label>
+                        <input type="date" class="form-control"
+                            id="trainee-einddatum" min="01-01-2020">
+                    </div>
+                </div>
+            </div>
+        </div>`
         } else if (this.value == "Bedrijf") {
             toevoegenGebruikerContainer.innerHTML = `<div class="bedrijf-form">
             <div class="row">
@@ -335,7 +451,7 @@ for (var i = 0; i < radios.length; i++) {
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="bedrijf-email">Email address</label>
+                        <label for="bedrijf-email">Email</label>
                         <input type="email" class="form-control" id="bedrijf-email"
                             placeholder="info@bedrijf.nl">
                     </div>
@@ -367,7 +483,7 @@ for (var i = 0; i < radios.length; i++) {
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="bedrijf-woonplaats">Woonplaats</label>
+                        <label for="bedrijf-woonplaats">Vestigingsplaats</label>
                         <input type="text" class="form-control"
                             id="bedrijf-woonplaats" placeholder="Utrecht">
                     </div>
@@ -375,7 +491,34 @@ for (var i = 0; i < radios.length; i++) {
             </div>
         </div>`
         } else if (this.value == "ContactPersoon") {
-            toevoegenGebruikerContainer.innerHTML = `<h1>contactpersoon</h1>`
+            toevoegenGebruikerContainer.innerHTML = `<div class="contactpersoon-form">
+            <div class="row">
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="contactpersoon-naam">Naam</label>
+                        <input type="text" class="form-control"
+                            id="contactpersoon-naam"
+                            placeholder="Naam contactpersoon">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label for="contactpersoon-email">Email</label>
+                        <input type="email" class="form-control"
+                            id="contactpersoon-email"
+                            placeholder="contactpersoon@bedrijf.com">
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="form-group">
+                        <label
+                            for="contactpersoon-telefoon">Telefoonnummer</label>
+                        <input type="telnum" class="form-control"
+                            id="contactpersoon-telefoon"
+                            placeholder="+31 6 00000000">
+                    </div>
+                </div>
+            </div>`
         } else {
             toevoegenGebruikerContainer.innerHTML = `<div class="interne-mw-form">
             <div class="row">
@@ -389,7 +532,7 @@ for (var i = 0; i < radios.length; i++) {
                 </div>
                 <div class="col-4">
                     <div class="form-group">
-                        <label for="interne-mw-email">Email address</label>
+                        <label for="interne-mw-email">Email</label>
                         <input type="email" class="form-control"
                             id="interne-mw-email"
                             placeholder="naam@qien.nl">
@@ -521,7 +664,7 @@ const updateContactPersoonSelector = () => {
             if (deContactPersonen.length > 0) {
                 console.log("in de if");
                 deContactPersonen.forEach((e) => {
-                    
+
                     // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
                     // class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
                     inTeVoegenHTML = `<option id=${e.id}>${e.naam}</option>`;
