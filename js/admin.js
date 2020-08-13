@@ -54,7 +54,6 @@ const laatFormulierenZien = () => {
             let inTeVoegenHTML = ``;
 
             if (deFormulieren.length > 0) {
-                console.log("in de if");
                 deFormulieren.forEach((e) => {
                     e.maand = maandNummerNaarString(e.maand);
 
@@ -65,20 +64,14 @@ const laatFormulierenZien = () => {
                     formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
             } else {
-                console.log("in de else");
                 inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen formulieren!</h4>
                 <p>tekst - veel plezier</p>
                 <hr>
                 <p class="mb-0">text - nog meer plezier.</p>
             </div>`;
 
-
-                console.log(inTeVoegenHTML);
                 formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
             }
-            // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-            //             Launch static backdrop modal
-            //         </button>
         }
     }
 
@@ -130,7 +123,6 @@ formulierenLijst.onclick = function (event) {
     xhr.send();
 
     goedkeurKnopje.addEventListener('click', () => {
-        console.log(hetFormulier.id);
 
         xhr.open("PUT", `http://localhost:8082/api/formulier/update/statusgoed/${id}`, true);
         xhr.send();
@@ -142,7 +134,6 @@ formulierenLijst.onclick = function (event) {
         }
     })
     afkeurKnopje.addEventListener('click', () => {
-        console.log(hetFormulier.id);
 
         xhr.open("PUT", `http://localhost:8082/api/formulier/update/statusfout/${id}`, true);
         xhr.send();
@@ -172,7 +163,6 @@ const laatMedewerkersZien = () => {
             let inTeVoegenHTML = ``;
 
             if (deMedewerkers.length > 0) {
-                console.log("in de if");
                 deMedewerkers.forEach((e) => {
                     // Als trainee geen opdrachtgever heeft dan veranderen naar "Niet geplaatst"
                     if (e.type === "Trainee" && e.opdrachtgever === null) {
@@ -191,20 +181,14 @@ const laatMedewerkersZien = () => {
                 })
 
             } else {
-                console.log("in de else");
                 inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen medewerkers!</h4>
                 <p>tekst - veel plezier</p>
                 <hr>
                 <p class="mb-0">text - nog meer plezier.</p>
             </div>`;
 
-
-                console.log(inTeVoegenHTML);
                 medewerkerLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
             }
-            // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-            //             Launch static backdrop modal
-            //         </button>
         }
     }
 
@@ -218,7 +202,7 @@ BEDRIJVEN
 
 const laatBedrijvenZien = () => {
     let xhr = new XMLHttpRequest();
-    
+
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
@@ -226,7 +210,6 @@ const laatBedrijvenZien = () => {
             let inTeVoegenHTML = ``;
 
             if (deBedrijven.length > 0) {
-                console.log("in de if");
                 deBedrijven.forEach((e) => {
                     // Als bedrijf geen contactpersoon heeft dan veranderen naar "Niet gekoppeld"
                     if (e.contactPersoon === null) {
@@ -242,20 +225,14 @@ const laatBedrijvenZien = () => {
                 })
 
             } else {
-                console.log("in de else");
                 inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen bedrijven!</h4>
                 <p>tekst - veel plezier</p>
                 <hr>
                 <p class="mb-0">text - nog meer plezier.</p>
             </div>`;
 
-
-                console.log(inTeVoegenHTML);
                 bedrijvenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
             }
-            // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
-            //             Launch static backdrop modal
-            //         </button>
         }
     }
 
@@ -267,33 +244,42 @@ const laatBedrijvenZien = () => {
 RELATIE AANMAKEN
 */
 
-const interneMedewerkerRadio = document.getElementById("radio-interne-mw");
-const interneMedewerkerNaam = document.getElementById("interne-mw-naam");
-const interneMedewerkerEmail = document.getElementById("interne-mw-email");
-const interneMedewerkerTelefoon = document.getElementById("interne-mw-telefoon");
-const interneMedewerkerStraatNaamEnNr = document.getElementById("interne-mw-straatnaamennummer");
-const interneMedewerkerPostcode = document.getElementById("interne-mw-postcode");
-const interneMedewerkerWoonPlaats = document.getElementById("interne-mw-woonplaats");
-const interneMedewerkerStartDatum = document.getElementById("interne-mw-startdatum");
-const interneMedewerkerEindDatum = document.getElementById("interne-mw-einddatum");
 
+const interneMedewerkerRadio = document.getElementById("radio-interne-mw");
 const traineeRadio = document.getElementById("radio-trainee");
 const bedrijfRadio = document.getElementById("radio-bedrijf");
+
+const bedrijfNaam = document.getElementById("bedrijf-naam");
+const bedrijfEmail = document.getElementById("bedrijf-email");
+const bedrijfTelefoon = document.getElementById("bedrijf-telefoon");
+const bedrijfStraatNaamEnNr = document.getElementById("bedrijf-straatnaamennummer");
+const bedrijfPostCode = document.getElementById("bedrijf-postcode");
+const bedrijfWoonplaats = document.getElementById("bedrijf-woonplaats");
+
 const contactPersoonRadio = document.getElementById("radio-contactpersoon");
 
 relatieAanmakenKnop.addEventListener("click", () => {
     var xhr = new XMLHttpRequest();
     if (interneMedewerkerRadio.checked) {
+        const interneMedewerkerNaam = document.getElementById("interne-mw-naam");
+        const interneMedewerkerEmail = document.getElementById("interne-mw-email");
+        const interneMedewerkerTelefoon = document.getElementById("interne-mw-telefoon");
+        const interneMedewerkerStraatNaamEnNr = document.getElementById("interne-mw-straatnaamennummer");
+        const interneMedewerkerPostcode = document.getElementById("interne-mw-postcode");
+        const interneMedewerkerWoonPlaats = document.getElementById("interne-mw-woonplaats");
+        const interneMedewerkerStartDatum = document.getElementById("interne-mw-startdatum");
+        const interneMedewerkerEindDatum = document.getElementById("interne-mw-einddatum");
+
         let typeRelatie = interneMedewerkerRadio.value;
         let naam = interneMedewerkerNaam.value;
         let email = interneMedewerkerEmail.value;
         let tel = interneMedewerkerTelefoon.value;
         let straatNaamEnNr = interneMedewerkerStraatNaamEnNr.value;
         let postCode = interneMedewerkerPostcode.value;
-        let woonPlaats = interneMedewerkerWoonPlaats.value; 
+        let woonPlaats = interneMedewerkerWoonPlaats.value;
         let startDatum = interneMedewerkerStartDatum.value;
         let eindDatum = interneMedewerkerEindDatum.value;
-    
+
         let interneMedewerkerJSON = {};
         interneMedewerkerJSON.type = typeRelatie;
         interneMedewerkerJSON.naam = naam;
@@ -304,25 +290,33 @@ relatieAanmakenKnop.addEventListener("click", () => {
         interneMedewerkerJSON.woonplaats = woonPlaats;
         interneMedewerkerJSON.startDatum = startDatum;
         interneMedewerkerJSON.eindDatum = eindDatum;
-        console.log(interneMedewerkerJSON);
-    
+
+
         xhr.open("POST", "http://localhost:8082/api/admin/internemedewerker/nieuw", true);
         xhr.setRequestHeader("Content-Type", "application/json");
+
+        console.log(interneMedewerkerNaam.value)
+        console.log(interneMedewerkerJSON);
+        console.log(JSON.stringify(interneMedewerkerJSON));
+
         xhr.send(JSON.stringify(interneMedewerkerJSON));
-    } 
+    }
+    if (bedrijfRadio.checked) {
+
+    }
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             location.reload();
         }
     }
-    
+
 })
 
 const radios = document.querySelectorAll(".form-check-input")
 var prev = null;
 for (var i = 0; i < radios.length; i++) {
-    radios[i].addEventListener('change', function() {
+    radios[i].addEventListener('change', function () {
         (prev) ? prev.value : null;
         if (this !== prev) {
             prev = this;
@@ -484,7 +478,7 @@ const updateTraineeSelector = () => {
             if (deTrainees.length > 0) {
                 console.log("in de if");
                 deTrainees.forEach((e) => {
-                    
+
                     // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
                     // class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
                     inTeVoegenHTML = `<option id=${e.id}>${e.naam}</option>`;
