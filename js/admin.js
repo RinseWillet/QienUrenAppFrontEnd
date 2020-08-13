@@ -464,9 +464,6 @@ for (var i = 0; i < radios.length; i++) {
 
 /*
 trainees laden selectorknop relatie koppelen
-
-const selectTrainee = document.getElementById("trainee-select");
-const selectContactPersoon = document.getElementById("contactpersoon-select");
 */
 
 
@@ -513,8 +510,51 @@ const updateTraineeSelector = () => {
     xhr.send();
 }
 
+/*
+contactpersonen laden selectorknop relatie koppelen
+*/
+
+const updateContactPersoonSelector = () => {
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            deContactPersonen = JSON.parse(this.responseText);
+            let inTeVoegenHTML = ``;
+            console.log(deContactPersonen);
 
 
+            if (deContactPersonen.length > 0) {
+                console.log("in de if");
+                deContactPersonen.forEach((e) => {
+                    
+                    // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
+                    // class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
+                    inTeVoegenHTML = `<option id=${e.id}>${e.naam}</option>`;
+                    selectContactPersoon.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+                })
+            } else {
+                console.log("in de else");
+                inTeVoegenHTML = `<div class="alert alert-danger" role="alert"><h4 class="alert-heading">Sapristi, geen formulieren!</h4>
+                <p>tekst - veel plezier</p>
+                <hr>
+                <p class="mb-0">text - nog meer plezier.</p>
+            </div>`;
+            }
+
+
+            //     console.log(inTeVoegenHTML);
+            //     formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
+            // }
+            // <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+            //             Launch static backdrop modal
+            //         </button>
+        }
+    }
+
+    xhr.open("GET", "http://localhost:8082/api/admin/klantcontactpersoon/all", true);
+    xhr.send();
+}
 
 
 /*
@@ -525,3 +565,4 @@ laatFormulierenZien();
 laatMedewerkersZien();
 laatBedrijvenZien();
 updateTraineeSelector();
+updateContactPersoonSelector();
