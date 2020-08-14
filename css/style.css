@@ -238,3 +238,12 @@ h2{
 .nav-tabs a {
     color: #9D3FF3 !important;
 }
+
+#contact-afbeelding {
+    background-color: #9D3FF3;
+    max-height: 5em;
+}
+
+.flex-row {
+    width: 100%;
+}
