@@ -505,7 +505,6 @@
                 </div>
             </div>
             </div>
-            <button id="specifiek">Send an HTTP GET request to a page and get the result back</button>
         </section>
     </main>
     <footer class="mt-3">
@@ -524,7 +523,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/js/bootstrap.min.js"
         integrity="sha384-XEerZL0cuoUbHE4nZReLT7nx9gQrQreJekYhJD9WNWhH8nEW+0c5qq7aIo2Wl30J"
         crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 
     <!-- Deze functie (JQuery) is om de popovers te maken -->
@@ -539,16 +537,6 @@
         $(function () {
             $('#myTab li:last-child a').tab('show')
         })
-    </script>
-
-<script>
-    $(document).ready(function(){
-      $("#specifiek").click(function(){
-        $.get("http://localhost:8082/api/admin/bedrijf/all", function(data){
-          alert("Data: " + data);
-        });
-      });
-    });
     </script>
 
 </body>

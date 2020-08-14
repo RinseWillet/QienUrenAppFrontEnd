@@ -220,7 +220,7 @@ const laatBedrijvenZien = () => {
 
 
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.contactPersoon.naam}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.contactPersoon}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     bedrijvenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
 
