@@ -10,8 +10,9 @@ const goedkeurKnopje = document.getElementById("goedkeuren");
 const afkeurKnopje = document.getElementById("afkeuren");
 const relatieAanmakenKnop = document.getElementById("knop-relatie-aanmaken");
 const toevoegenGebruikerContainer = document.getElementById("toevoegen-gebruiker-container");
-const selectTrainee = document.getElementById("trainee-select");
-const selectContactPersoon = document.getElementById("contactpersoon-select");
+const selectTrainee = document.getElementById("trainee_select");
+const selectContactPersoon = document.getElementById("contactpersoon_select");
+var selectTraineeId;
 
 const maandNummerNaarString = (maandNummer) => {
     switch (maandNummer) {
@@ -179,19 +180,25 @@ const laatMedewerkersZien = () => {
                 deMedewerkers.forEach((e) => {
                     console.log("in foreach: " + e)
                     // Als trainee geen opdrachtgever heeft dan veranderen naar "Niet geplaatst"
-                    console.log(e.naam)
-                    if (e.type === "Trainee" && e.opdrachtgever === null) {
-                        e.opdrachtgever = {
+                    console.log(e.leidingGevende)
+                    if (e.type === "Trainee" && e.leidingGevende === null) {
+                        e.leidingGevende = {
+                            "naam" : "Niet gekoppeld"
+                        }
+                        e.leidingGevende.company = {
                             "naam": "Niet geplaatst"
                         }
                     } else if (e.type === "InterneMedewerker") {
+                        e.leidingGevende = {
+                            "naam" : "Niet gekoppeld"
+                        }
                         e.type = "Interne Medewerker";
-                        e.opdrachtgever = {
+                        e.leidingGevende.company = {
                             "naam": "Qien"
                         }
                     }
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.opdrachtgever.naam}</span><span id="${e.id}">${e.type}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.type}</span><span id="${e.id}">${e.leidingGevende.company.naam}</span><span id="${e.id}">${e.leidingGevende.naam}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     medewerkerLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
 
@@ -235,7 +242,7 @@ const laatBedrijvenZien = () => {
 
 
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.contactPersoon.naam}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">${e.naam}</span><span id="${e.id}">${e.contactPersoon}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     bedrijvenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
 
@@ -631,7 +638,7 @@ const updateTraineeSelector = () => {
 
 
             if (deTrainees.length > 0) {
-                console.log("in de if");
+                console.log("in de if");               
                 deTrainees.forEach((e) => {
 
                     // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
@@ -707,6 +714,43 @@ const updateContactPersoonSelector = () => {
     xhr.open("GET", "http://localhost:8082/api/admin/klantcontactpersoon/all", true);
     xhr.send();
 }
+
+
+//hier verder werken!!!
+
+function koppelTraineeContactpersoon(s, d){
+    var xhr = new XMLHttpRequest();
+    var traineeId = s[s.selectedIndex].id;
+    var ContactPersoonId = d[d.selectedIndex].id;
+
+    xhr.onreadystatechange = function () {
+        console.log("nieuwe koppeling gemaakt")
+    }
+
+    xhr.open("PUT", "http://localhost:8082/api/admin/trainee/koppelContactPersoon/{id}/{bedrijfid} " + id, true);
+  
+    console.log(s[s.selectedIndex].id);
+    console.log(d[d.selectedIndex].id);
+
+}
+
+
+// function newSalary(){
+//     var xhr = new XMLHttpRequest();
+//     var id = document.getElementById("id").value
+//     var obj = {};
+//     obj.salary = document.getElementById("nieuwsalaris").value;
+//     objJSON =JSON.stringify(obj);
+//     xhr.onreadystatechange = function(){
+//         console.log("nieuw salaris ingevoerd")
+//     }
+//     xhr.open("PUT", "http://localhost:8082/api/admin/koppelContactPersoon/{id}//newsalary/" + id, true);
+//     xhr.setRequestHeader("Content-type", "application/json")
+//     xhr.send(objJSON);
+
+// }
+
+
 
 
 /*

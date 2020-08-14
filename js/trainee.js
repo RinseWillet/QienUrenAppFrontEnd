@@ -4,7 +4,7 @@ const formBody = document.getElementById("form-body");
 const modalHeader = document.querySelector(".modal-title");
 const klikbaarOogje = document.querySelector(".fa-eye");
 const formulierItem = document.querySelector(".list-group-item");
-
+const traineeOpdrachtgever = document.getElementById("trainee-opdracht");
 
 
 const maandNummerNaarString = (maandNummer) => {
@@ -53,7 +53,8 @@ const traineeNaamFunction = () => {
         if (xhr.readyState == 4) {
             trainee = JSON.parse(this.responseText);
             let formulierHTML = ``;
-            traineeNaam.innerHTML = `Welkom, ${trainee.naam}!`; 
+            traineeNaam.innerHTML = `Welkom, ${trainee.naam}!`;
+            traineeOpdrachtgever.innerHTML = `Opdrachtgever : ${trainee.opdrachtgever}`; 
                 var formulieren = trainee.archief;
                 formulieren.sort(function(a, b){return a.id-b.id});
                 formulieren.reverse();
@@ -75,6 +76,13 @@ const traineeNaamFunction = () => {
     xhr.open("GET", `http://localhost:8082/api/trainee/${urlId}` , true);
     xhr.send();
 } 
+
+
+
+
+
+
+
 
 const genereerFormulier = (formulier) => {
     formulier.maand = maandNummerNaarString(formulier.maand);
