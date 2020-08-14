@@ -4,6 +4,7 @@ const bedrijvenLijst = document.getElementById("bedrijven-list");
 const formulierItem = document.querySelector(".list-group-item");
 const formBody = document.getElementById("form-body");
 const modalHeader = document.querySelector(".modal-title");
+const modalFooter = document.querySelector(".modal-footer");
 const klikbaarOogje = document.querySelector(".fa-eye");
 const goedkeurKnopje = document.getElementById("goedkeuren");
 const afkeurKnopje = document.getElementById("afkeuren");
@@ -56,11 +57,16 @@ const laatFormulierenZien = () => {
             if (deFormulieren.length > 0) {
                 deFormulieren.forEach((e) => {
                     e.maand = maandNummerNaarString(e.maand);
+                    if (e.opdrachtgeverStatus === "OPEN") {
+                        e.adminStatus = "Bij Klant";
+                    } else if (e.opdrachtgeverStatus === "AFGEKEURD") {
+                        e.adminStatus = "Afgekeurd door klant";
+                    }
 
                     // inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" href="./formulier.html?id=${e.id}" 
                     // class="list-group-item list-group-item-action" id="${e.id}">${e.naam} | ${e.maand} | ${e.jaar} | ${e.formulierstatus}</li>`;
                     inTeVoegenHTML = `<li data-toggle="modal" data-target="#staticBackdrop" 
-                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">Rinse Willet</span><span id="${e.id}">${e.maand}</span><span id="${e.id}">${e.jaar}</span><span id="${e.id}">${e.formulierStatus}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
+                    class="list-group-item list-group-item-action d-flex justify-content-between" id="${e.id}"><span id="${e.id}">Rinse Willet</span><span id="${e.id}">${e.maand}</span><span id="${e.id}">${e.jaar}</span><span id="${e.id}">${e.adminStatus}</span><i id="${e.id}" class="far fa-eye"></i></li>`;
                     formulierenLijst.insertAdjacentHTML('beforeend', inTeVoegenHTML);
                 })
             } else {
@@ -80,8 +86,14 @@ const laatFormulierenZien = () => {
 }
 
 const genereerFormulier = (formulier) => {
+    if (formulier.opdrachtgeverStatus === "OPEN" || formulier.opdrachtgeverStatus === "AFGEKEURD") {
+        modalFooter.style.display = "none";
+    } else {
+        modalFooter.style.display = "flex";
+    }
+    
     formulier.maand = maandNummerNaarString(formulier.maand);
-    modalHeader.innerHTML = `Rinse Willet | ${formulier.maand}/${formulier.jaar}`
+    modalHeader.innerHTML = `<span class="pt-0">Rinse Willet | ${formulier.maand}/${formulier.jaar}</span><span class="pt-0">Status opdrachtgever: ${formulier.opdrachtgeverStatus}</span>`
     for (let i = 0; i < formulier.werkDagen.length; i++) {
         formBody.insertAdjacentHTML("beforeend",
             `<tr id="dag-${i + 1}" class="formulier-rij">
@@ -124,7 +136,7 @@ formulierenLijst.onclick = function (event) {
 
     goedkeurKnopje.addEventListener('click', () => {
 
-        xhr.open("PUT", `http://localhost:8082/api/formulier/update/statusgoed/${id}`, true);
+        xhr.open("PUT", `http://localhost:8082/api/admin/update/statusgoed/${id}`, true);
         xhr.send();
 
         xhr.onreadystatechange = function () {
@@ -135,7 +147,7 @@ formulierenLijst.onclick = function (event) {
     })
     afkeurKnopje.addEventListener('click', () => {
 
-        xhr.open("PUT", `http://localhost:8082/api/formulier/update/statusfout/${id}`, true);
+        xhr.open("PUT", `http://localhost:8082/api/admin/update/statusfout/${id}`, true);
         xhr.send();
 
         xhr.onreadystatechange = function () {
@@ -160,11 +172,14 @@ const laatMedewerkersZien = () => {
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
             deMedewerkers = JSON.parse(this.responseText);
+            console.log(deMedewerkers)
             let inTeVoegenHTML = ``;
 
             if (deMedewerkers.length > 0) {
                 deMedewerkers.forEach((e) => {
+                    console.log("in foreach: " + e)
                     // Als trainee geen opdrachtgever heeft dan veranderen naar "Niet geplaatst"
+                    console.log(e.naam)
                     if (e.type === "Trainee" && e.opdrachtgever === null) {
                         e.opdrachtgever = {
                             "naam": "Niet geplaatst"
