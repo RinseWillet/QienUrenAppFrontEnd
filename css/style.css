@@ -248,3 +248,17 @@ h2{
 .flex-row {
     width: 100%;
 }
+
+/* dit is de styling voor de profielpagina gemaakt door deniece en maurice*/
+
+#profielachtergrond{
+    background-color: #EAEAEA;
+}
+
+.profielblok{
+    width: 20%;
+    padding-right: 20px;
+}
+
+
+
