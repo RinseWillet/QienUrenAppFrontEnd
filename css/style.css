@@ -251,19 +251,27 @@ h2{
 
 /* dit is de styling voor de profielpagina gemaakt door deniece en maurice*/
 
-#profielachtergrond{
-    background-color: #EAEAEA;
+#profielgroteblok{
+    padding-left: 15%;
+    padding-top: 10%; 
 }
+#profielachtergrond{
+    background-color: #EAEAEA; 
+}
+
 
 #profielblok{
     width: 30%;
     padding: 1.7%;
-
 }
 
-#profielgroteblok{
-    padding-left: 15%;
-    padding-top: 5%;
+
+ul{
+    list-style-type:none;
 }
+
+
+
+
 
 
